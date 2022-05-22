@@ -1,0 +1,36 @@
+{%load static %}
+
+<div class="ui menu">
+
+    <div class="right menu">
+
+        {% if request.user.is_authenticated %}
+            
+            <div class="item">
+
+                <div class="ui simple dropdown item">
+                    Olá, {{request.user.first_name}} <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <form class="ui large form" method="post" action="">
+                            {% csrf_token %}
+                            <input class="ui button" type="submit" value="Sign out"/>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        {% else %}
+            <div class="item">
+                <a href="" class="ui teal button">Login</a>
+            </div>
+            
+            <div class="item">
+            <a href="{% url 'cadastrar' %}" class="ui teal button">Registre-se</a>
+            </div>
+
+        {% endif %}
+    
+    </div>
+
+  </div>

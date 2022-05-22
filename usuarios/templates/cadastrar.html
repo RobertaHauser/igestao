@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}Novo funcionário{% endblock %}
+
+{% block content %}
+
+<div class="ui grid">
+  <div class="six wide column centered">
+    <div class="ui middle aligned center aligned grid">
+      <div class="column mt-5">
+        <h2 class="ui teal image header">
+          <!--<img src={% static 'img/Logo.png' %} class="image" />-->
+          <div class="content">Registre-se no iGestão</div>
+        </h2>
+        
+        {% if form.errors %}
+            
+            <div class="ui error message" style="text-align:left;">
+                
+                <div class="header">Erros</div>
+                
+                {% for campo in form %}
+                    {% for erro in campo.errors %}
+                        <span>{{ erro|escape }}</span><br>
+                    {% endfor %}
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+        {% if messages %}
+            <div class="ui success message" style="text-align:left;">
+                <div class="header">Registro realizado com sucesso</div>
+                <p>Acesse seu email para verificar sua conta.</p>
+            </div>
+        {% endif %}
+
+        <form class="ui form {{ form.email.errors|yesno:'error,success' }}" method="post" action="{% url 'cadastrar' %}">
+          
+            {% csrf_token %}
+
+          <div class="ui stacked segment">
+
+              <div class="field">
+                  <div class="ui left icon input">
+                      <i class="user icon"></i>
+                      {{ form.nome}}
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="ui left icon input">
+                    <i class="user icon"></i>
+                    {{ form.sobrenome}}
+                </div>
+            </div>
+  
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="envelope icon"></i>
+                {{form.email}}
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                {{form.senha}}
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                {{form.confirmacao_senha}}
+              </div>
+            </div>
+
+            <button type="submit" class="ui fluid large teal button">Registrar-se</button>
+            
+            
+        </form>       
+
+        <div class="ui message">
+            Já tem uma conta? <a href="" class="teal">Entrar</a>
+        </div>
+
+    <div class="four wide column"></div>
+  </div>
+</div>
+
+{% endblock content %}
