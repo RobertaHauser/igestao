@@ -11,9 +11,9 @@
                 <div class="ui simple dropdown item">
                     Olá, {{request.user.first_name}} <i class="dropdown icon"></i>
                     <div class="menu">
-                        <form class="ui large form" method="post" action="">
+                        <form class="ui large form" method="post" action="{% url 'logout' %}">
                             {% csrf_token %}
-                            <input class="ui button" type="submit" value="Sign out"/>
+                            <input class="ui button" type="submit" value="Sair"/>
                         </form>
                     </div>
                 </div>
