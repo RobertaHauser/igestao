@@ -1,6 +1,10 @@
 from django.views.generic.edit import FormView
+from django.views.generic import View
+from django.shortcuts import render
+
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 
 from usuarios.forms import RegistrarUsuarioForm
 
@@ -23,3 +27,21 @@ class CadastrarUsuarioView(FormView):
 
         contexto = {"form": form, "sucesso": True}
         return self.render_to_response(self.get_context_data(**contexto))
+
+class LoginView(View):
+    template_name = "login.html"
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+
+        email = request.POST.get("email")
+        senha = request.POST.get("senha")
+        
+        usuario = authenticate(email=email, password=senha)
+        
+        if usuario:
+            login(request, usuario)
+
+        return render(request, self.template_name)
