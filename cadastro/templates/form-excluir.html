@@ -6,9 +6,10 @@
 
 {% block content %}
     
-    <h3>Cabeçalho página</h3>
+    <h3>Exclusão</h3>
 
     <form class="ui form" method="POST" action="">
+        <p>Deseja excluir o registro {{object}} ?</p>
         {% csrf_token %}
         
         {{form.as_p}}

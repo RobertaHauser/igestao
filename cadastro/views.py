@@ -1,6 +1,7 @@
 import imp
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView,DeleteView
+from django.views.generic.list import ListView
 from .models import Unidade
 from django.urls import reverse_lazy
 #from urllib import request
@@ -29,7 +30,13 @@ class UnidadeUpdate(UpdateView):
 
 #### DELETE
 
-class UnidadeDelete(UpdateView):
+class UnidadeDelete(DeleteView):
 	model=Unidade
 	template_name='form-excluir.html'
 	sucess_url=reverse_lazy('usuarios/home')
+
+
+#### LIST
+class UnidadeList(ListView):
+	model=Unidade
+	template_name='cadastro-read.html'
