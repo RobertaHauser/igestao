@@ -17,6 +17,9 @@ class UnidadeCreate(CreateView):
 	template_name='form.html'
 	sucess_url=reverse_lazy('usuarios/home')
 
+def post(request, *args, **kwargs):
+    print(self.request)
+
 
 
 #### UPDATE
