@@ -8,6 +8,9 @@ from django.contrib.auth import authenticate, login
 
 from usuarios.forms import RegistrarUsuarioForm
 
+def home(request):
+    return render(request,'index.html')
+
 class CadastrarUsuarioView(FormView):
     template_name = "cadastrar.html"
     form_class = RegistrarUsuarioForm
